@@ -25,12 +25,16 @@ class Blinkly:
         main_frame = tk.Frame(self.root)
         main_frame.pack(pady=10, fill='both', expand=True)
         
+        # Get system colors
+        system_bg = self.root.cget('bg')  # Get system background color
+        
         label = tk.Label(
             main_frame, 
             text="Set Reminder Interval in Minutes:", 
-            font=("Helvetica", 16)
+            font=("Helvetica", 16),
+            bg=system_bg,
+            fg='systemTextColor'  # Use system text color
         )
-        label.configure(background=main_frame.cget('background'))  # Match parent background
         label.pack(pady=10)
         
         self.interval_entry = tk.Entry(
@@ -77,9 +81,9 @@ class Blinkly:
         label = tk.Label(
             reminder_frame, 
             text="Time to blink!", 
-            font=("Helvetica", 30)
+            font=("Helvetica", 30),
+            fg='systemTextColor'  # Use system text color
         )
-        label.configure(background=reminder_frame.cget('background'))  # Match parent background
         label.pack(expand=True)
 
         dismiss_button = tk.Button(
