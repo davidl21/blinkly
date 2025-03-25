@@ -6,19 +6,18 @@ import sys
 import argparse
 
 class Blinkly:
-    def __init__(self):
+    def __init__(self, initial_time=20):
         self.root = tk.Tk()
         self.root.title("Blinkly")
         self.root.geometry("500x500")
         self.root.protocol("WM_DELETE_WINDOW", self.close_app)
         self.root.bind("<Command-q>", lambda event: self.close_app())
 
-        self.interval = tk.IntVar(value=20)
-
+        self.interval = tk.IntVar(value=initial_time)
+        self.reminder_window = None
         # GUI
         self.build_gui()
-
-        self.reminder_window = None
+        
     
     def build_gui(self):
         # Main window label
