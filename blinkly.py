@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from threading import Timer
 import sys
+import argparse
 
 class Blinkly:
     def __init__(self):
@@ -110,5 +111,8 @@ class Blinkly:
             sys.exit()
 
 if __name__ == "__main__":
-    app = Blinkly()
+    parser = argparse.ArgumentParser(description='Blinkly - A reminder to blink')
+    parser.add_argument('-t', '--time', type=int, default=20, help='Set the reminder time in minutes (default: 20)')
+    args = parser.parse_args()
+    app = Blinkly(initial_time=args.time)
     app.root.mainloop()
