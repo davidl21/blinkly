@@ -22,16 +22,18 @@ class Blinkly:
     
     def build_gui(self):
         # Main window label
-        main_frame = ttk.Frame(self.root)
+        main_frame = tk.Frame(self.root)
         main_frame.pack(pady=10, fill='both', expand=True)
         
-        ttk.Label(
+        label = tk.Label(
             main_frame, 
             text="Set Reminder Interval in Minutes:", 
             font=("Helvetica", 16)
-        ).pack(pady=10)
+        )
+        label.configure(background=main_frame.cget('background'))  # Match parent background
+        label.pack(pady=10)
         
-        self.interval_entry = ttk.Entry(
+        self.interval_entry = tk.Entry(
             main_frame, 
             textvariable=self.interval, 
             font=("Helvetica", 16), 
@@ -40,11 +42,11 @@ class Blinkly:
         self.interval_entry.pack(pady=5)
 
         # start button
-        start_button = ttk.Button(main_frame, text="Start Blinkly", command=self.start_timer)
+        start_button = tk.Button(main_frame, text="Start Blinkly", command=self.start_timer)
         start_button.pack(pady=10)
 
         # close button
-        close_button = ttk.Button(main_frame, text="Close Blinkly", command=self.close_app)
+        close_button = tk.Button(main_frame, text="Close Blinkly", command=self.close_app)
         close_button.pack(pady=5)
 
     def start_timer(self):
@@ -69,22 +71,18 @@ class Blinkly:
         self.reminder_window.attributes("-fullscreen", True)
         self.reminder_window.attributes("-topmost", True)
         
-        reminder_frame = ttk.Frame(self.reminder_window)
+        reminder_frame = tk.Frame(self.reminder_window)
         reminder_frame.pack(fill="both", expand=True)
         
-        style = ttk.Style()
-        style.configure('Reminder.TLabel', 
-                       font=("Helvetica", 30),
-                       foreground='black',
-                       background='white')
-        
-        ttk.Label(
+        label = tk.Label(
             reminder_frame, 
             text="Time to blink!", 
-            style='Reminder.TLabel'
-        ).pack(expand=True)
+            font=("Helvetica", 30)
+        )
+        label.configure(background=reminder_frame.cget('background'))  # Match parent background
+        label.pack(expand=True)
 
-        dismiss_button = ttk.Button(
+        dismiss_button = tk.Button(
             reminder_frame,
             text="Dismiss Timer", 
             command=self.dismiss_reminder
