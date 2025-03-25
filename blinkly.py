@@ -9,7 +9,7 @@ class Blinkly:
     def __init__(self, initial_time=20):
         self.root = tk.Tk()
         self.root.title("Blinkly")
-        self.root.geometry("500x500")
+        self.root.geometry("500x400")
         self.root.protocol("WM_DELETE_WINDOW", self.close_app)
         self.root.bind("<Command-q>", lambda event: self.close_app())
 
@@ -28,16 +28,16 @@ class Blinkly:
         system_bg = self.root.cget('bg')  # Get system background color
        
         # timer buttons
-        button_5min = tk.Button(main_frame, text="5 minutes", command=lambda: self.set_timer(5))
+        button_5min = tk.Button(main_frame, text="5 minutes", command=lambda: [self.set_timer(5), print("Timer set for 5 minutes")])
         button_5min.pack(pady=5)
 
-        button_10min = tk.Button(main_frame, text="10 minutes", command=lambda: self.set_timer(10))
+        button_10min = tk.Button(main_frame, text="10 minutes", command=lambda: [self.set_timer(10), print("Timer set for 10 minutes")])
         button_10min.pack(pady=5)
         
-        button_15min = tk.Button(main_frame, text="15 minutes", command=lambda: self.set_timer(15))
+        button_15min = tk.Button(main_frame, text="15 minutes", command=lambda: [self.set_timer(15), print("Timer set for 15 minutes")])
         button_15min.pack(pady=5)
 
-        button_20min = tk.Button(main_frame, text="20 minutes", command=lambda: self.set_timer(20))
+        button_20min = tk.Button(main_frame, text="20 minutes", command=lambda: [self.set_timer(20), print("Timer set for 20 minutes")])
         button_20min.pack(pady=5)
         
         # start button
