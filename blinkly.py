@@ -67,16 +67,10 @@ class Blinkly:
         self.reminder_window.attributes("-fullscreen", True)
         self.reminder_window.attributes("-topmost", True)
         
-        # Configure both window and its internal frame
         self.reminder_window.configure(bg="black")
-        self.reminder_window.update()  # Force update of window
-        
-        # Create a black frame to ensure full coverage
-        frame = tk.Frame(self.reminder_window, bg="black")
-        frame.pack(fill="both", expand=True)
         
         label = tk.Label(
-            frame, 
+            self.reminder_window, 
             text="Time to blink!", 
             font=("Helvetica", 30), 
             bg="black", 
@@ -85,7 +79,7 @@ class Blinkly:
         label.pack(expand=True)
 
         dismiss_button = tk.Button(
-            frame,
+            self.reminder_window,
             text="Dismiss Timer", 
             font=("Helvetica", 16),
             command=self.dismiss_reminder,
