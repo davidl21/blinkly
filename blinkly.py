@@ -23,8 +23,7 @@ class Blinkly:
             self.root, 
             text="Set Reminder Interval in Minutes:", 
             font=("Helvetica", 16),
-            fg="black",  # Text color
-            bg="white"   # Background color
+            fg="black",  # Keep text color
         ).pack(pady=10)
         
         self.interval_entry = tk.Entry(
@@ -32,8 +31,7 @@ class Blinkly:
             textvariable=self.interval, 
             font=("Helvetica", 16), 
             width=10,
-            fg="black",  # Text color
-            bg="white"   # Background color
+            fg="black",  # Keep text color
         )
         self.interval_entry.pack(pady=5)
 
@@ -67,13 +65,10 @@ class Blinkly:
         self.reminder_window.attributes("-fullscreen", True)
         self.reminder_window.attributes("-topmost", True)
         
-        self.reminder_window.configure(bg="black")
-        
         label = tk.Label(
             self.reminder_window, 
             text="Time to blink!", 
             font=("Helvetica", 30), 
-            bg="black", 
             fg="white"
         )
         label.pack(expand=True)
@@ -83,7 +78,6 @@ class Blinkly:
             text="Dismiss Timer", 
             font=("Helvetica", 16),
             command=self.dismiss_reminder,
-            bg="white",
             fg="black"
         )
         dismiss_button.pack(pady=20)
