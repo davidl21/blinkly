@@ -8,6 +8,7 @@ class Blinkly:
         self.root = tk.Tk()
         self.root.title("Blinkly")
         self.root.geometry("400x200")
+        self.root.protocol("WM_DELETE_WINDOW", self.close_app)
 
         self.interval = tk.IntVar(value=20)
 
@@ -18,8 +19,22 @@ class Blinkly:
         self.root.mainloop()
     
     def build_gui(self):
-        tk.Label(self.root, text="Set Reminder Interval in Minutes:", font=("Helvetica", 16)).pack(pady=10)
-        self.interval_entry = tk.Entry(self.root, textvariable=self.interval, font=("Helvetica", 16), width=10)
+        tk.Label(
+            self.root, 
+            text="Set Reminder Interval in Minutes:", 
+            font=("Helvetica", 16),
+            fg="black",  # Text color
+            bg="white"   # Background color
+        ).pack(pady=10)
+        
+        self.interval_entry = tk.Entry(
+            self.root, 
+            textvariable=self.interval, 
+            font=("Helvetica", 16), 
+            width=10,
+            fg="black",  # Text color
+            bg="white"   # Background color
+        )
         self.interval_entry.pack(pady=5)
 
         # start button
@@ -28,7 +43,7 @@ class Blinkly:
 
         # close button
         close_button = tk.Button(self.root, text="Close Blinkly", font=("Helvetica", 16), command=self.close_app)
-        close_button.pack(pady=10)
+        close_button.pack(pady=5)
 
     def start_timer(self):
         try:
@@ -51,12 +66,32 @@ class Blinkly:
         self.reminder_window.title("Blinkly")
         self.reminder_window.attributes("-fullscreen", True)
         self.reminder_window.attributes("-topmost", True)
+        
+        # Configure both window and its internal frame
         self.reminder_window.configure(bg="black")
-
-        label = tk.Label(self.reminder_window, text="Time to blink!", font=("Helvetica", 30), bg="black", fg="white")
+        self.reminder_window.update()  # Force update of window
+        
+        # Create a black frame to ensure full coverage
+        frame = tk.Frame(self.reminder_window, bg="black")
+        frame.pack(fill="both", expand=True)
+        
+        label = tk.Label(
+            frame, 
+            text="Time to blink!", 
+            font=("Helvetica", 30), 
+            bg="black", 
+            fg="white"
+        )
         label.pack(expand=True)
 
-        dismiss_button = tk.Button(self.reminder_window, text="Dismiss Timer", font=("Helvetica", 16), command=self.dismiss_reminder)
+        dismiss_button = tk.Button(
+            frame,
+            text="Dismiss Timer", 
+            font=("Helvetica", 16),
+            command=self.dismiss_reminder,
+            bg="white",
+            fg="black"
+        )
         dismiss_button.pack(pady=20)
 
         self.reminder_window.bind("<Escape>", lambda e: self.dismiss_reminder())
