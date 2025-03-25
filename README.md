@@ -1,10 +1,11 @@
 # blinkly
 
-blink reminder!
+simple blink reminder for macos built with tkinter
 
 ## Usage
 
-python3 blinkly.py
+- `python3 blinkly.py`
+- `python3 blinkly.py -t x` or `python3 blinkly.py --time x` to set the reminder to x minutes
 
 ## Features
 
