@@ -8,7 +8,7 @@ class Blinkly:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Blinkly")
-        self.root.geometry("400x200")
+        self.root.geometry("500x500")
         self.root.protocol("WM_DELETE_WINDOW", self.close_app)
         self.root.bind("<Command-q>", lambda event: self.close_app())
 
@@ -18,7 +18,6 @@ class Blinkly:
         self.build_gui()
 
         self.reminder_window = None
-        self.root.mainloop()
     
     def build_gui(self):
         # Main window label
@@ -27,24 +26,20 @@ class Blinkly:
         
         # Get system colors
         system_bg = self.root.cget('bg')  # Get system background color
-        
-        label = tk.Label(
-            main_frame, 
-            text="Set Reminder Interval in Minutes:", 
-            font=("Helvetica", 16),
-            bg=system_bg,
-            fg='black'  # Standard black text
-        )
-        label.pack(pady=10)
-        
-        self.interval_entry = tk.Entry(
-            main_frame, 
-            textvariable=self.interval, 
-            font=("Helvetica", 16), 
-            width=10
-        )
-        self.interval_entry.pack(pady=5)
+       
+        # timer buttons
+        button_5min = tk.Button(main_frame, text="5 minutes", command=lambda: self.set_timer(5))
+        button_5min.pack(pady=5)
 
+        button_10min = tk.Button(main_frame, text="10 minutes", command=lambda: self.set_timer(10))
+        button_10min.pack(pady=5)
+        
+        button_15min = tk.Button(main_frame, text="15 minutes", command=lambda: self.set_timer(15))
+        button_15min.pack(pady=5)
+
+        button_20min = tk.Button(main_frame, text="20 minutes", command=lambda: self.set_timer(20))
+        button_20min.pack(pady=5)
+        
         # start button
         start_button = tk.Button(main_frame, text="Start Blinkly", command=self.start_timer)
         start_button.pack(pady=10)
@@ -52,6 +47,9 @@ class Blinkly:
         # close button
         close_button = tk.Button(main_frame, text="Close Blinkly", command=self.close_app)
         close_button.pack(pady=5)
+
+    def set_timer(self, minutes):
+        self.interval.set(minutes)
 
     def start_timer(self):
         try:
@@ -112,4 +110,5 @@ class Blinkly:
             sys.exit()
 
 if __name__ == "__main__":
-    Blinkly()
+    app = Blinkly()
+    app.root.mainloop()
