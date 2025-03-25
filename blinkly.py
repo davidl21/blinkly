@@ -33,7 +33,7 @@ class Blinkly:
             text="Set Reminder Interval in Minutes:", 
             font=("Helvetica", 16),
             bg=system_bg,
-            fg='systemTextColor'  # Use system text color
+            fg='black'  # Standard black text
         )
         label.pack(pady=10)
         
@@ -82,7 +82,7 @@ class Blinkly:
             reminder_frame, 
             text="Time to blink!", 
             font=("Helvetica", 30),
-            fg='systemTextColor'  # Use system text color
+            fg='black'  # Standard black text
         )
         label.pack(expand=True)
 
