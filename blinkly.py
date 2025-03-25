@@ -64,9 +64,19 @@ class Blinkly:
             messagebox.showerror("Invalid Input", "Please enter a valid number of minutes.")
     
     def schedule_reminder(self, seconds):
+        # Schedule the main reminder
         self.timer = Timer(seconds, self.show_reminder)
         self.timer.start()
-    
+        
+        # Schedule progress notifications every 5 minutes
+        total_minutes = seconds // 60
+        for minutes in range(total_minutes - 1, 0, -5):  # Count down by 5
+            if minutes <= 0:
+                break
+            notification_seconds = seconds - (minutes * 60)  # Time until this notification
+            Timer(notification_seconds, 
+                  lambda m=minutes: print(f"{m} minutes until reminder")).start()
+
     def show_reminder(self):
         self.reminder_window = tk.Toplevel(self.root)
         self.reminder_window.title("Blinkly")
