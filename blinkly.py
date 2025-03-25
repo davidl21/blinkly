@@ -19,19 +19,24 @@ class Blinkly:
         self.root.mainloop()
     
     def build_gui(self):
+        # Main window label
+        label_frame = tk.Frame(self.root)
+        label_frame.pack(pady=10)
+        
         tk.Label(
-            self.root, 
+            label_frame, 
             text="Set Reminder Interval in Minutes:", 
             font=("Helvetica", 16),
-            fg="black",  # Keep text color
-        ).pack(pady=10)
+            fg="black",
+            bg="#f0f0f0"  # Light gray background
+        ).pack()
         
         self.interval_entry = tk.Entry(
             self.root, 
             textvariable=self.interval, 
             font=("Helvetica", 16), 
             width=10,
-            fg="black",  # Keep text color
+            fg="black"
         )
         self.interval_entry.pack(pady=5)
 
@@ -65,16 +70,20 @@ class Blinkly:
         self.reminder_window.attributes("-fullscreen", True)
         self.reminder_window.attributes("-topmost", True)
         
+        reminder_frame = tk.Frame(self.reminder_window, bg="#000000")
+        reminder_frame.pack(fill="both", expand=True)
+        
         label = tk.Label(
-            self.reminder_window, 
+            reminder_frame, 
             text="Time to blink!", 
             font=("Helvetica", 30), 
-            fg="white"
+            fg="white",
+            bg="#000000"  # Black background
         )
         label.pack(expand=True)
 
         dismiss_button = tk.Button(
-            self.reminder_window,
+            reminder_frame,
             text="Dismiss Timer", 
             font=("Helvetica", 16),
             command=self.dismiss_reminder,
