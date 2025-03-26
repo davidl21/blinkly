@@ -40,6 +40,14 @@ class Blinkly:
         button_20min = tk.Button(main_frame, text="20 minutes", command=lambda: [self.set_timer(20), print("Timer set for 20 minutes")])
         button_20min.pack(pady=5)
         
+        # Store buttons in a dictionary for easy access
+        self.timer_buttons = {
+            5: button_5min,
+            10: button_10min,
+            15: button_15min,
+            20: button_20min
+        }
+        
         # start button
         start_button = tk.Button(main_frame, text="Start Blinkly", command=self.start_timer)
         start_button.pack(pady=10)
@@ -49,6 +57,14 @@ class Blinkly:
         close_button.pack(pady=5)
 
     def set_timer(self, minutes):
+        # Reset all buttons to normal state
+        for btn in self.timer_buttons.values():
+            btn.configure(relief="raised")
+        
+        # Highlight selected button
+        self.timer_buttons[minutes].configure(relief="sunken")
+        
+        # Set the timer value
         self.interval.set(minutes)
 
     def start_timer(self):
@@ -121,7 +137,18 @@ class Blinkly:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Blinkly - A reminder to blink')
-    parser.add_argument('-t', '--time', type=int, default=20, help='Set the reminder time in minutes (default: 20)')
+    parser.add_argument('-t', '--time', type=int, default=20,
+                       help='Set the reminder time in minutes (default: 20)')
+    parser.add_argument('-r', '--remaining', action='store_true',
+                       help='Check remaining time on active timer')
+    parser.add_argument('-c', '--close', action='store_true',
+                       help='Close Blinkly')
     args = parser.parse_args()
+    
     app = Blinkly(initial_time=args.time)
-    app.root.mainloop()
+    if args.close:
+        app.close_app()
+    elif args.remaining:
+        app.get_remaining_time()
+    else:
+        app.root.mainloop()
